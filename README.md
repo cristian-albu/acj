@@ -16,23 +16,23 @@ I'm using:
 
 ## Project structure:
 
-|-app
-| ---- api > all of the app's endpoints
-| ---- [pages directories]
-| ---------- page.tsx > server side page structure
-| ---------- layout.tsx > what shows up on every page and sub-page
-| ---------- View.tsx > client side page structure
-| ---------- page.module.scss > styling for every page and sub-page
-|-shared
-| ---- components > general components that are used in multiple places
-| ---- contexts > all the contexts for the app
-| ---- hooks > useful react hooks
-|-lib
-| ---- utils > useful functions
-| ---- mail > every mailing function
-| ---- validation > every value validation function
-| ---- data > static data
-| ---- data-parses > every parsing function for data structures
+-   app
+    -   api > all of the app's endpoints
+    -   [pages directories]
+        -   page.tsx > server side page structure
+        -   layout.tsx > what shows up on every page and sub-page
+        -   View.tsx > client side page structure
+        -   page.module.scss > styling for every page and sub-page
+-   shared
+    -   components > general components that are used in multiple places
+    -   contexts > all the contexts for the app
+    -   hooks > useful react hooks
+-   lib
+    -   utils > useful functions
+    -   mail > every mailing function
+    -   validation > every value validation function
+    -   data > static data
+    -   data-parses > every parsing function for data structures
 
 Projects notes:
 Even if this app is using NextJs v13^ and server components, I will use API endpoints. I might change the API in the future to another framework/language
