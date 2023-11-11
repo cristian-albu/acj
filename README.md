@@ -1,36 +1,73 @@
+Project main scope: Personal portfolio, courses platform, online shop, and blog app.
+Project secondary scope: Test out my skills and learn how to manage a bigger app with multiple facets.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+I'm using:
+
+-   Nextjs 13^
+-   Typesript
+-   Zod for type validation
+-   Prisma for schema, types, and as an ORM
+-   Scss and modules for styling
+-   React Icons for icons
+-   Bcrypt for encryption
+-   Sendgrid for emails
+
+## Project structure:
+
+-   app
+    -   api > all of the app's endpoints
+    -   [pages directories]
+        -   page.tsx > server side page structure
+        -   layout.tsx > what shows up on every page and sub-page
+        -   View.tsx > client side page structure
+        -   page.module.scss > styling for every page and sub-page
+-   shared
+    -   components > general components that are used in multiple places
+    -   contexts > all the contexts for the app
+    -   hooks > useful react hooks
+-   lib
+    -   utils > useful functions
+    -   mail > every mailing function
+    -   validation > every value validation function
+    -   data > static data
+    -   data-parses > every parsing function for data structures
+
+Projects notes:
+Even if this app is using NextJs v13^ and server components, I will use API endpoints. I might change the API in the future to another framework/language
 
 ## Getting Started
 
-First, run the development server:
+Development server:
 
 ```bash
-npm run dev
-# or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Created .env and a .local.env files
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Using Planetscale mysql for the db
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+.env file
 
-## Learn More
+```bash
+DATABASE_URL='pscale db url'
+```
 
-To learn more about Next.js, take a look at the following resources:
+Run command to build tables from schema
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+yarn prisma db push
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Using SendGrid for emails
 
-## Deploy on Vercel
+.local.env file
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+NODE_ENV='development'
+SENDGRID_API_KEY='sendgrid API key'
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Setup the SendGrid account with a sender user, authenticated sending domain with GoDaddy records, and enabled 2FA
