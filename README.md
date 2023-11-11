@@ -35,7 +35,9 @@ I'm using:
     -   data-parses > every parsing function for data structures
 
 Projects notes:
-Even if this app is using NextJs v13^ and server components, I will use API endpoints. I might change the API in the future to another framework/language
+
+-   Even if this app is using NextJs v13^ and server components, I will use API endpoints. I might change the API in the future to another framework/language
+-   Even if there are many libraries that make authentication very easy, I will be implementing my own in order to learn more from it.
 
 ## Getting Started
 

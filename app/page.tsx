@@ -1,9 +1,12 @@
 import React from "react";
-import sendMail, { msg } from "@/lib/mail/testEmail";
+import HomeView from "./HomeView";
 
 const Home = () => {
-    sendMail(msg);
-    return <div>Home</div>;
+    return (
+        <div>
+            <HomeView />
+        </div>
+    );
 };
 
 export default Home;
