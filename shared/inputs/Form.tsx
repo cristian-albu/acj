@@ -2,6 +2,7 @@
 import React, { ChangeEvent, useState } from "react";
 import Input from "./Input";
 import { TDataState, TFormPropsObject, TInput } from "./types";
+import styles from "@/shared/inputs/inputs.module.scss";
 
 /**
  * Create a data structure that will generate a form with all of its inputs
@@ -53,7 +54,9 @@ const Form: React.FC<TFormPropsObject> = ({ formProps }) => {
     const handleAction = () => {};
 
     return (
-        <form onChange={eventHandlers.onChange}>
+        <form className={styles.form} onChange={eventHandlers.onChange} id={header?.id}>
+            <h3>{header?.title}</h3>
+            <p>{header?.description}</p>
             {inputs.map((props: TInput) => {
                 return <Input key={props.id} {...props} />;
             })}

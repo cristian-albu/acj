@@ -33,13 +33,12 @@ const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultVa
     const commonInputPropsAndHandlers = {
         id,
         name: label,
-        onchange: validationCallback,
+        onChange: validationCallback,
     };
 
     if (type === "switch") {
         return (
             <label className={styles.switchLabel}>
-                <p className={styles.switchLabelP}>{label}</p>
                 <input
                     className={styles.switch}
                     type="checkbox"
@@ -47,6 +46,8 @@ const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultVa
                     {...commonInputPropsAndHandlers}
                     {...rest}
                 />
+                <div className={styles.switch} />
+                <p className={styles.switchLabelP}>{label}</p>
             </label>
         );
     } else if (type === "textarea") {
