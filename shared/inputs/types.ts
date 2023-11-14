@@ -13,7 +13,7 @@ export type TValidationMethodObject = {
 
 export type TValidationMethod = {
     method: (args: any) => TValidationMethodObject;
-    methodArgs: (string | number)[];
+    methodArgs?: (string | number)[];
 };
 
 export type TSwitch = {

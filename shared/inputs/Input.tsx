@@ -6,6 +6,8 @@ import styles from "@/shared/inputs/inputs.module.scss";
 const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultValue, defaultChecked, ...rest }) => {
     const [errorState, setErrorState] = useState<string[]>([]);
 
+    const [blurState, setBlurState] = useState(false);
+
     const validationCallback = (event: ChangeEvent<HTMLInputElement & HTMLTextAreaElement>) => {
         let value: string | number | boolean | undefined;
         switch (event.target.type) {
@@ -20,7 +22,7 @@ const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultVa
         }
 
         const errorList: string[] = [];
-        validationMethods?.forEach(({ method, methodArgs }: TValidationMethod) => {
+        validationMethods?.forEach(({ method, methodArgs = [] }: TValidationMethod) => {
             const errObj = method(value, ...(methodArgs as []));
             if (!errObj.isValid) {
                 errorList.push(errObj.error);
@@ -34,6 +36,7 @@ const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultVa
         id,
         name: label,
         onChange: validationCallback,
+        onBlur: () => setBlurState(true),
     };
 
     if (type === "switch") {
@@ -48,6 +51,7 @@ const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultVa
                 />
                 <div className={styles.switch} />
                 <p className={styles.switchLabelP}>{label}</p>
+                {errorState.length > 0 && blurState && <InputError errors={errorState} />}
             </label>
         );
     } else if (type === "textarea") {
@@ -55,6 +59,7 @@ const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultVa
             <label className={styles.label}>
                 <p className={styles.labelP}>{label}</p>
                 <textarea className={styles.input} defaultValue={defaultValue} {...commonInputPropsAndHandlers} {...rest} />
+                {errorState.length > 0 && blurState && <InputError errors={errorState} />}
             </label>
         );
     } else {
@@ -68,9 +73,20 @@ const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultVa
                     {...commonInputPropsAndHandlers}
                     {...rest}
                 />
+                {errorState.length > 0 && blurState && <InputError errors={errorState} />}
             </label>
         );
     }
 };
 
 export default Input;
+
+const InputError: React.FC<{ errors: string[] }> = ({ errors }) => {
+    return (
+        <div className={styles.errorList}>
+            {errors.map((e: string) => (
+                <p key={e}>🚩{e}</p>
+            ))}
+        </div>
+    );
+};
