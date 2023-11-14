@@ -11,112 +11,120 @@
     padding: 2rem;
     gap: 1rem;
     background-color: white;
-}
 
-.label {
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-
-    .labelP {
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
-        &::first-letter {
-            text-transform: uppercase;
-        }
+    .errorList {
+        position: absolute;
+        bottom: 80%;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        max-width: 60%;
+        background-color: white;
+        padding: 1rem;
+        font-size: 0.8rem;
+        border-radius: 0.5rem;
+        border: 1px solid black;
+        border-bottom-right-radius: 0px;
     }
 
-    .input {
+    .label {
         width: 100%;
-        outline: none;
-        border: 1px solid black;
-        padding: 0.5rem;
-        border-radius: 0.33rem;
-        border-top-left-radius: 0px;
-        transition: border 200ms;
-
-        &:hover {
-            border: 1px solid red;
-        }
-
-        &:active,
-        &:focus {
-            border: 1px solid blue;
-        }
-    }
-
-    textarea {
-        min-width: 100%;
         max-width: 100%;
-    }
-}
-
-.switchLabel {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-
-    .switchLabelP {
-        margin-left: 0.5rem;
-    }
-
-    .switch {
-        height: 1.5rem;
-        background-color: rgb(255, 255, 255);
-        border: 1px solid black;
-        border-radius: 99rem;
+        display: flex;
+        flex-direction: column;
         position: relative;
-        cursor: pointer;
-        padding-left: 0rem;
-        padding-right: 1rem;
-        transition: padding 200ms;
 
-        &:after {
-            display: block;
-            content: "";
-            background-color: rgb(0, 0, 0);
-            height: 100%;
-            aspect-ratio: 1/1;
-            border-radius: 100%;
-            transition: background-color 200ms;
+        .labelP {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            &::first-letter {
+                text-transform: uppercase;
+            }
+        }
+
+        .input {
+            width: 100%;
+            outline: none;
+            border: 1px solid black;
+            padding: 0.5rem;
+            border-radius: 0.33rem;
+            border-top-left-radius: 0px;
+            transition: border 200ms;
+
+            &:hover {
+                border: 1px solid red;
+            }
+
+            &:active,
+            &:focus {
+                border: 1px solid blue;
+
+                &.inputError {
+                    border: 1px solid red;
+                }
+            }
+
+            &.inputError {
+                border: 1px solid red;
+            }
+        }
+
+        textarea {
+            min-width: 100%;
+            max-width: 100%;
         }
     }
 
-    input[type="checkbox"] {
-        width: 0px;
-        height: 0px;
-        transition: all 200ms;
+    .switchLabel {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
 
-        &:checked {
-            ~ .switch {
-                padding-left: 1rem;
-                padding-right: 0rem;
+        .switchLabelP {
+            margin-left: 0.5rem;
+        }
 
-                &:after {
-                    background-color: rgb(126, 126, 126);
+        .switch {
+            height: 1.5rem;
+            background-color: rgb(255, 255, 255);
+            border: 1px solid black;
+            border-radius: 99rem;
+            position: relative;
+            cursor: pointer;
+            padding-left: 0rem;
+            padding-right: 1rem;
+            transition: padding 200ms;
+
+            &:after {
+                display: block;
+                content: "";
+                background-color: rgb(0, 0, 0);
+                height: 100%;
+                aspect-ratio: 1/1;
+                border-radius: 100%;
+                transition: background-color 200ms;
+            }
+        }
+
+        input[type="checkbox"] {
+            width: 0px;
+            height: 0px;
+            transition: all 200ms;
+
+            &:checked {
+                ~ .switch {
+                    padding-left: 1rem;
+                    padding-right: 0rem;
+
+                    &:after {
+                        background-color: rgb(126, 126, 126);
+                    }
                 }
             }
         }
     }
-}
-
-.errorList {
-    position: absolute;
-    bottom: 80%;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    max-width: 60%;
-    background-color: white;
-    padding: 1rem;
-    font-size: 0.8rem;
-    border-radius: 0.5rem;
-    border: 1px solid black;
-    border-bottom-right-radius: 0px;
 }

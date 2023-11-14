@@ -4,9 +4,7 @@ import { TInput, TValidationMethod } from "./types";
 import styles from "@/shared/inputs/inputs.module.scss";
 
 const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultValue, defaultChecked, ...rest }) => {
-    const [errorState, setErrorState] = useState<string[]>([]);
-
-    const [blurState, setBlurState] = useState(false);
+    const [errorModel, setErrorModel] = useState({ focused: false, blurred: false, initial: false, errors: [] as string[] });
 
     const validationCallback = (event: ChangeEvent<HTMLInputElement & HTMLTextAreaElement>) => {
         let value: string | number | boolean | undefined;
@@ -29,21 +27,26 @@ const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultVa
             }
         });
 
-        setErrorState(errorList);
+        setErrorModel({ ...errorModel, errors: errorList });
     };
 
     const commonInputPropsAndHandlers = {
         id,
         name: label,
         onChange: validationCallback,
-        onBlur: () => setBlurState(true),
+        onBlur: () => {
+            setErrorModel({ ...errorModel, focused: false, blurred: true, initial: true });
+        },
+        onFocus: () => {
+            setErrorModel({ ...errorModel, focused: true, blurred: false });
+        },
     };
 
     if (type === "switch") {
         return (
             <label className={styles.switchLabel}>
                 <input
-                    className={styles.switch}
+                    className={`${styles.switch} ${errorModel.errors.length > 0 && styles.inputError}`}
                     type="checkbox"
                     defaultChecked={defaultChecked}
                     {...commonInputPropsAndHandlers}
@@ -51,15 +54,24 @@ const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultVa
                 />
                 <div className={styles.switch} />
                 <p className={styles.switchLabelP}>{label}</p>
-                {errorState.length > 0 && blurState && <InputError errors={errorState} />}
+                {errorModel.errors.length > 0 && errorModel.focused && errorModel.initial && (
+                    <InputError errors={errorModel.errors} />
+                )}
             </label>
         );
     } else if (type === "textarea") {
         return (
             <label className={styles.label}>
                 <p className={styles.labelP}>{label}</p>
-                <textarea className={styles.input} defaultValue={defaultValue} {...commonInputPropsAndHandlers} {...rest} />
-                {errorState.length > 0 && blurState && <InputError errors={errorState} />}
+                <textarea
+                    className={`${styles.input} ${errorModel.errors.length > 0 && styles.inputError}`}
+                    defaultValue={defaultValue}
+                    {...commonInputPropsAndHandlers}
+                    {...rest}
+                />
+                {errorModel.errors.length > 0 && errorModel.focused && errorModel.initial && (
+                    <InputError errors={errorModel.errors} />
+                )}
             </label>
         );
     } else {
@@ -67,13 +79,15 @@ const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultVa
             <label className={styles.label}>
                 <p className={styles.labelP}>{label}</p>
                 <input
-                    className={styles.input}
+                    className={`${styles.input} ${errorModel.errors.length > 0 && styles.inputError}`}
                     type={type}
                     defaultValue={defaultValue}
                     {...commonInputPropsAndHandlers}
                     {...rest}
                 />
-                {errorState.length > 0 && blurState && <InputError errors={errorState} />}
+                {errorModel.errors.length > 0 && errorModel.focused && errorModel.initial && (
+                    <InputError errors={errorModel.errors} />
+                )}
             </label>
         );
     }
