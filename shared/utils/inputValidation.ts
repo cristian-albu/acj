@@ -87,9 +87,7 @@ export function validateSimpleText(value: string, customError?: string): Tvalida
     } else {
         return {
             isValid: false,
-            error:
-                customError ||
-                "Invalid text format. It should contain only simple letters, numbers, and @ # % & () /,.;' \"\\:!?-+=",
+            error: customError || "Invalid text format",
         };
     }
 }

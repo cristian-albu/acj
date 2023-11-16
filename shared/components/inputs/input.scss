@@ -1,44 +1,38 @@
+$purple: rgb(185, 135, 245);
+$blue: rgb(43, 185, 232);
+
 .form {
     width: 100%;
-    min-width: 600px;
-    max-width: 900px;
-    border: 1px solid black;
     border-radius: 0.33rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 2rem;
     gap: 1rem;
-    background-color: white;
-
-    .errorList {
-        position: absolute;
-        bottom: 80%;
-        right: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        max-width: 60%;
-        background-color: white;
-        padding: 1rem;
-        font-size: 0.8rem;
-        border-radius: 0.5rem;
-        border: 1px solid black;
-        border-bottom-right-radius: 0px;
-    }
+    position: relative;
 
     .label {
-        width: 100%;
-        max-width: 100%;
         display: flex;
         flex-direction: column;
         position: relative;
+        width: 100%;
+
+        & textarea {
+            min-width: 100%;
+            max-width: 100%;
+            width: 100%;
+        }
+
+        & span {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 0.5rem;
+        }
 
         .labelP {
             font-size: 1rem;
-            margin-bottom: 0.5rem;
+
             &::first-letter {
                 text-transform: uppercase;
             }
@@ -46,34 +40,30 @@
 
         .input {
             width: 100%;
+            max-width: 100%;
             outline: none;
-            border: 1px solid black;
+            border: 1px solid gray;
             padding: 0.5rem;
             border-radius: 0.33rem;
             border-top-left-radius: 0px;
             transition: border 200ms;
 
             &:hover {
-                border: 1px solid red;
+                border: 1px solid $purple;
             }
 
             &:active,
             &:focus {
-                border: 1px solid blue;
+                border: 1px solid $blue;
 
                 &.inputError {
-                    border: 1px solid red;
+                    border: 1px solid rgb(191, 85, 14);
                 }
             }
 
             &.inputError {
-                border: 1px solid red;
+                border: 1px solid rgb(191, 85, 14);
             }
-        }
-
-        textarea {
-            min-width: 100%;
-            max-width: 100%;
         }
     }
 
@@ -102,7 +92,7 @@
             &:after {
                 display: block;
                 content: "";
-                background-color: rgb(0, 0, 0);
+                background-color: gray;
                 height: 100%;
                 aspect-ratio: 1/1;
                 border-radius: 100%;
@@ -121,10 +111,27 @@
                     padding-right: 0rem;
 
                     &:after {
-                        background-color: rgb(126, 126, 126);
+                        background-color: $purple;
                     }
                 }
             }
         }
+    }
+
+    .errorList {
+        position: absolute;
+        bottom: 80%;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        max-width: 60%;
+        background-color: white;
+        padding: 1rem;
+        font-size: 0.8rem;
+        border-radius: 0.5rem;
+        border: 1px solid black;
+        border-bottom-right-radius: 0px;
     }
 }

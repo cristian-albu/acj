@@ -1,9 +1,8 @@
-"use client";
 import React, { ChangeEvent, useState } from "react";
 import { TInput, TValidationMethod } from "./types";
-import styles from "@/shared/inputs/inputs.module.scss";
+import "./input.scss";
 
-const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultValue, defaultChecked, ...rest }) => {
+const Input: React.FC<TInput> = ({ id, label, icon, type, validationMethods, defaultValue, defaultChecked, ...rest }) => {
     const [errorModel, setErrorModel] = useState({ focused: false, blurred: false, initial: false, errors: [] as string[] });
 
     const validationCallback = (event: ChangeEvent<HTMLInputElement & HTMLTextAreaElement>) => {
@@ -44,16 +43,16 @@ const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultVa
 
     if (type === "switch") {
         return (
-            <label className={styles.switchLabel}>
+            <label className="switchLabel">
                 <input
-                    className={`${styles.switch} ${errorModel.errors.length > 0 && styles.inputError}`}
+                    className={`switch ${errorModel.errors.length > 0 && "inputError"}`}
                     type="checkbox"
                     defaultChecked={defaultChecked}
                     {...commonInputPropsAndHandlers}
                     {...rest}
                 />
-                <div className={styles.switch} />
-                <p className={styles.switchLabelP}>{label}</p>
+                <div className="switch" />
+                <p className="switchLabelP">{label}</p>
                 {errorModel.errors.length > 0 && errorModel.focused && errorModel.initial && (
                     <InputError errors={errorModel.errors} />
                 )}
@@ -61,10 +60,12 @@ const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultVa
         );
     } else if (type === "textarea") {
         return (
-            <label className={styles.label}>
-                <p className={styles.labelP}>{label}</p>
+            <label className="label">
+                <span>
+                    {icon} <p className="labelP">{label}</p>
+                </span>
                 <textarea
-                    className={`${styles.input} ${errorModel.errors.length > 0 && styles.inputError}`}
+                    className={`input ${errorModel.errors.length > 0 && "inputError"}`}
                     defaultValue={defaultValue}
                     {...commonInputPropsAndHandlers}
                     {...rest}
@@ -76,10 +77,12 @@ const Input: React.FC<TInput> = ({ id, label, type, validationMethods, defaultVa
         );
     } else {
         return (
-            <label className={styles.label}>
-                <p className={styles.labelP}>{label}</p>
+            <label className="label">
+                <span>
+                    {icon} <p className="labelP">{label}</p>
+                </span>
                 <input
-                    className={`${styles.input} ${errorModel.errors.length > 0 && styles.inputError}`}
+                    className={`input ${errorModel.errors.length > 0 && "inputError"}`}
                     type={type}
                     defaultValue={defaultValue}
                     {...commonInputPropsAndHandlers}
@@ -97,7 +100,7 @@ export default Input;
 
 const InputError: React.FC<{ errors: string[] }> = ({ errors }) => {
     return (
-        <div className={styles.errorList}>
+        <div className="errorList">
             {errors.map((e: string) => (
                 <p key={e}>🚩{e}</p>
             ))}

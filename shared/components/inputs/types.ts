@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import React, { HTMLAttributes } from "react";
 
 export type TFormHeader = {
     title?: string;
@@ -29,14 +29,20 @@ export type TTextInput = {
 export type TInput = {
     id: string;
     label: string;
+    icon?: React.ReactNode;
     validationMethods?: TValidationMethod[];
 } & (TTextInput | TSwitch) &
     HTMLAttributes<HTMLInputElement | HTMLTextAreaElement>;
 
+export type TFormAction = {
+    btnText: string;
+    action: (data: any) => void;
+};
+
 export type TFormProps = {
     header?: TFormHeader;
     inputs: TInput[];
-    action: (data: any) => void;
+    action: TFormAction;
 };
 
 export type TFormPropsObject = {

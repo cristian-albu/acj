@@ -1,8 +1,8 @@
-"use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import Input from "./Input";
 import { TDataState, TFormPropsObject, TInput } from "./types";
-import styles from "@/shared/inputs/inputs.module.scss";
+import "./input.scss";
+import Button from "../layout/Button";
 
 /**
  * Create a data structure that will generate a form with all of its inputs
@@ -25,7 +25,7 @@ import styles from "@/shared/inputs/inputs.module.scss";
         { id: "inputId4", label: "password input", type: "password", defaultValue: "Hello world" },
         { id: "inputId5", label: "number input", type: "number", defaultValue: 15 },
     ],
-    action: () => console.log("data"),
+    action: {btnText: "Submit", action: (args) => console.log("Action fired")},
 };
 };
  */
@@ -58,18 +58,21 @@ const Form: React.FC<TFormPropsObject> = ({ formProps }) => {
         },
         onFocus: () => {},
         onBlur: () => {},
-        onsubmit: () => {},
+        onSubmit: (e: FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+        },
     };
 
     const handleAction = () => {};
 
     return (
-        <form className={styles.form} onChange={eventHandlers.onChange} id={header?.id}>
+        <form className="form" onChange={eventHandlers.onChange} id={header?.id} onSubmit={eventHandlers.onSubmit}>
             <h3>{header?.title}</h3>
             <p>{header?.description}</p>
             {inputs.map((props: TInput) => {
                 return <Input key={props.id} {...props} />;
             })}
+            <Button onClick={handleAction}>{action.btnText}</Button>
         </form>
     );
 };
