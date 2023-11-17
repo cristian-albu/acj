@@ -2,6 +2,27 @@ import React, { ChangeEvent, useState } from "react";
 import { TInput, TValidationMethod } from "./types";
 import "./input.scss";
 
+/**
+ * 
+ * @example
+ * 
+ * const inputObject:TInput = {
+    id: "input id", // Make sure each id is unique
+    label: "Visible label",
+    icon: "Optional icon (can be string or a React Node)", // Optional type
+    type: "text" | "textarea" | "password" | "number",
+    defaultValue: "Hello world",
+    validationMethods: [
+        {
+            method: validateLength, // A callback that will grab the input value as the first argument and the rest of the methodArg
+            methodArgs: [5, 10], // Rest of the arguments that will be passed to the callback
+        },
+        {
+            method: validateSimpleText, // If the callback only needs the value from the input, you can skip the rest of the arguments.
+        },
+    ],
+};
+ */
 const Input: React.FC<TInput> = ({ id, label, icon, type, validationMethods, defaultValue, defaultChecked, ...rest }) => {
     const [errorModel, setErrorModel] = useState({ focused: false, blurred: false, initial: false, errors: [] as string[] });
 

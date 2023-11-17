@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import { ButtonHTMLAttributes, DetailedHTMLProps, FormHTMLAttributes, HTMLAttributes } from "react";
 
 export type TChildren = {
     children: React.ReactNode;
@@ -15,13 +15,18 @@ export type TWrapper = {
 } & TChildren &
     HTMLAttributes<HTMLDivElement>;
 
-export type TButton = {} & TChildren & HTMLAttributes<HTMLButtonElement>;
+export type TButton = {} & TChildren & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export type TCard = {
     width?: "full" | "half" | "third" | "quarter";
     tight?: boolean;
     hasHover?: boolean;
+    isFormElement?: boolean;
 } & TChildren &
-    HTMLAttributes<HTMLDivElement>;
+    (TCardDiv | TCardForm);
+
+export type TCardDiv = HTMLAttributes<HTMLDivElement>;
+
+export type TCardForm = { isFormElement?: true } & FormHTMLAttributes<HTMLFormElement>;
 
 export type TRow = {} & TChildren & HTMLAttributes<HTMLDivElement>;

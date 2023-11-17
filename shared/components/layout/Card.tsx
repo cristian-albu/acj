@@ -1,6 +1,7 @@
+"use client";
 import React from "react";
 import "./layout.scss";
-import { TCard } from "./types";
+import { TCard, TCardDiv, TCardForm } from "./types";
 
 /**
  * Wrap components in order to provide a max-width
@@ -8,12 +9,22 @@ import { TCard } from "./types";
  * @param tight - (optional) boolean value that makes the padding be greater or smaller
  * @returns
  */
-const Card: React.FC<TCard> = ({ children, width, tight, hasHover, ...rest }) => {
-    return (
-        <div className={`card ${width} ${tight && "tight"} ${hasHover && "cardHover"}`} {...rest}>
-            {children}
-        </div>
-    );
+const Card: React.FC<TCard> = ({ children, width, tight, hasHover, isFormElement, ...rest }) => {
+    const styling = `card ${width} ${tight && "tight"} ${hasHover && "cardHover"}`;
+
+    if (isFormElement) {
+        return (
+            <form className={styling} {...(rest as TCardForm)}>
+                {children}
+            </form>
+        );
+    } else {
+        return (
+            <div className={styling} {...(rest as TCardDiv)}>
+                {children}
+            </div>
+        );
+    }
 };
 
 export default Card;

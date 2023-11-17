@@ -1,7 +1,4 @@
-$purple: rgb(156, 89, 237);
-$red: rgb(245, 135, 135);
-$purpleShadow: rgba($purple, 0.2);
-$gap: 1rem;
+@use "/app/_master.scss" as v;
 
 .wrapper {
     width: 100%;
@@ -28,17 +25,22 @@ $gap: 1rem;
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: $gap;
-    margin-bottom: calc($gap * 2);
+    gap: v.$gap;
+    margin-bottom: calc(v.$gap * 2);
 }
 
 .card {
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     color: black;
     padding: 2rem;
     border-radius: 1rem;
     width: 100%;
-    box-shadow: 0rem 1.5rem 4rem -1rem $purpleShadow;
+    box-shadow: 0rem 1.5rem 4rem -1rem v.$purpleShadow;
+    gap: v.$gap;
 
     &.cardHover {
         transition: box-shadow 250ms, transform 250ms;
@@ -47,7 +49,7 @@ $gap: 1rem;
         cursor: pointer;
 
         &:hover {
-            box-shadow: 0rem 1.5rem 6rem 0rem $purpleShadow;
+            box-shadow: 0rem 1.5rem 6rem 0rem v.$purpleShadow;
             transform: scale(1.03);
             z-index: 10;
         }
@@ -60,25 +62,25 @@ $gap: 1rem;
         width: 100%;
     }
     &.half {
-        width: calc(50% - $gap/2);
+        width: calc(50% - v.$gap/2);
     }
     &.third {
-        width: calc(33.33% - $gap * 0.67);
+        width: calc(33.33% - v.$gap * 0.67);
     }
     &.quarter {
-        width: calc(25% - $gap * 0.8);
+        width: calc(25% - v.$gap * 0.8);
     }
 }
 
 .button {
-    background-color: $purple;
+    background-color: v.$purple;
     color: white;
     outline: none;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 0.33rem;
     cursor: pointer;
-    transition: transform 200ms;
+    transition: transform 200ms, background-color 200ms;
 
     &:hover {
         transform: scale(1.1);
@@ -86,6 +88,19 @@ $gap: 1rem;
 
     &:active {
         transform: scale(0.95);
+    }
+
+    &:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+
+        &:hover {
+            transform: scale(1);
+        }
+
+        &:active {
+            transform: scale(1);
+        }
     }
 }
 
@@ -146,7 +161,7 @@ $gap: 1rem;
         }
 
         & :nth-child(1) {
-            background-color: $purple;
+            background-color: v.$purple;
             top: 25%;
             left: 65%;
             animation-duration: 4s;
@@ -154,7 +169,7 @@ $gap: 1rem;
         }
 
         & :nth-child(2) {
-            background-color: $red;
+            background-color: v.$red;
             top: 35%;
             left: 25%;
             animation-duration: 2s;
@@ -162,7 +177,7 @@ $gap: 1rem;
         }
 
         & :nth-child(3) {
-            background-color: $purple;
+            background-color: v.$purple;
             top: 45%;
             left: 45%;
             animation-duration: 3s;
@@ -170,7 +185,7 @@ $gap: 1rem;
         }
 
         & :nth-child(4) {
-            background-color: $red;
+            background-color: v.$red;
             top: 55%;
             left: 65%;
             animation-duration: 5s;
@@ -178,7 +193,7 @@ $gap: 1rem;
         }
 
         & :nth-child(5) {
-            background-color: $purple;
+            background-color: v.$purple;
             top: 65%;
             left: 25%;
             animation-duration: 6s;
