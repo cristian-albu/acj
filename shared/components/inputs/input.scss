@@ -9,6 +9,51 @@
     align-items: flex-start;
     gap: 1rem;
     position: relative;
+
+    & .header {
+        width: 100%;
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: v.$gap / 2;
+
+        &.start {
+            justify-content: flex-start;
+        }
+
+        &.mid {
+            justify-content: center;
+        }
+
+        &.end {
+            justify-content: flex-end;
+        }
+    }
+
+    & .actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: v.$gap;
+
+        &.start {
+            justify-content: flex-start;
+        }
+
+        &.mid {
+            justify-content: center;
+        }
+
+        &.end {
+            justify-content: flex-end;
+        }
+
+        &.between {
+            justify-content: space-between;
+        }
+    }
 }
 
 .errorList {

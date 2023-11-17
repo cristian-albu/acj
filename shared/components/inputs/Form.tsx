@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import Input from "./Input";
-import { TDataState, TFormPropsObject, TInput } from "./types";
+import { TDataState, TFormAction, TFormPropsObject, TInput } from "./types";
 import "./input.scss";
 import Button from "../layout/Button";
 
@@ -30,9 +30,9 @@ import Button from "../layout/Button";
 };
  */
 const Form: React.FC<TFormPropsObject> = ({ formProps }) => {
-    const { header, inputs, action } = formProps;
+    const { headerData, inputData, actionData } = formProps;
 
-    const initialProps: TDataState = inputs.reduce(
+    const initialProps: TDataState = inputData.reduce(
         (obj, input) => ({ ...obj, [input.id]: input.type === "switch" ? input.defaultChecked : input.defaultValue }),
         {}
     );
@@ -63,16 +63,31 @@ const Form: React.FC<TFormPropsObject> = ({ formProps }) => {
         },
     };
 
-    const handleAction = () => {};
-
     return (
-        <form className="form" onChange={eventHandlers.onChange} id={header?.id} onSubmit={eventHandlers.onSubmit}>
-            <h3>{header?.title}</h3>
-            <p>{header?.description}</p>
-            {inputs.map((props: TInput) => {
+        <form className="form" onChange={eventHandlers.onChange} id={headerData?.id} onSubmit={eventHandlers.onSubmit}>
+            <span className={`header ${headerData?.align}`}>
+                {headerData?.icon} <h3>{headerData?.title}</h3>
+            </span>
+            <p>{headerData?.description}</p>
+            {inputData.map((props: TInput) => {
                 return <Input key={props.id} {...props} />;
             })}
-            <Button onClick={handleAction}>{action.btnText}</Button>
+
+            <div className={`actions ${actionData.align}`}>
+                {actionData.actions.map((action: TFormAction) => {
+                    return (
+                        <Button
+                            key={action.btnText}
+                            onClick={() => action.action(data)}
+                            disabled={action.btnDisabled}
+                            btnType={action.btnType}
+                        >
+                            {action.btnIcon}
+                            {action.btnText}
+                        </Button>
+                    );
+                })}
+            </div>
         </form>
     );
 };

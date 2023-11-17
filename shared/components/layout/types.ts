@@ -5,6 +5,7 @@ export type TChildren = {
 };
 
 export type TSection = {
+    fullScreen?: boolean;
     type?: "dark" | "light";
     animation?: boolean;
 } & TChildren &
@@ -15,7 +16,7 @@ export type TWrapper = {
 } & TChildren &
     HTMLAttributes<HTMLDivElement>;
 
-export type TButton = {} & TChildren & ButtonHTMLAttributes<HTMLButtonElement>;
+export type TButton = { btnType?: "primary" | "secondary" } & TChildren & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export type TCard = {
     width?: "full" | "half" | "third" | "quarter";

@@ -5,9 +5,9 @@ import { TSection } from "./types";
 /**
  * @param type dark | light (optional)
  */
-const Section: React.FC<TSection> = ({ children, type, animation, ...rest }) => {
+const Section: React.FC<TSection> = ({ children, type, animation, fullScreen, ...rest }) => {
     return (
-        <section className={`section ${type}`} {...rest}>
+        <section className={`section ${type} ${fullScreen && "fs"}`} {...rest}>
             {children}
             {animation && (
                 <div className="bgAnimation">

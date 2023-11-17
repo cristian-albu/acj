@@ -4,6 +4,8 @@ export type TFormHeader = {
     title?: string;
     id?: string;
     description?: string;
+    icon?: any;
+    align?: "mid" | "start" | "end";
 };
 
 export type TValidationMethodObject = {
@@ -27,6 +29,8 @@ export type TTextInput = {
 };
 
 export type TInput = {
+    /** This will be used as a key for the state in the Form Component. You should match it with the target of your data.
+     * If you want to send data to the server as json you could think of it as {'id' : 'value'} */
     id: string;
     label: string;
     icon?: React.ReactNode;
@@ -37,12 +41,20 @@ export type TInput = {
 export type TFormAction = {
     btnText: string;
     action: (data: any) => void;
+    btnIcon?: any;
+    btnType?: "primary" | "secondary";
+    btnDisabled?: boolean;
+};
+
+export type TFormActions = {
+    actions: TFormAction[];
+    align?: "mid" | "start" | "end" | "between";
 };
 
 export type TFormProps = {
-    header?: TFormHeader;
-    inputs: TInput[];
-    action: TFormAction;
+    headerData?: TFormHeader;
+    inputData: TInput[];
+    actionData: TFormActions;
 };
 
 export type TFormPropsObject = {
